@@ -21,10 +21,10 @@ namespace RobotCleaner
             robot.Move(0, 0);
             robot.StartCleaning();
 
-            Assert.That(map.IsDirt(0, 0), Is.False, "Top-left corner should be cleaned");
-            Assert.That(map.IsDirt(4, 0), Is.False, "Top-right corner should be cleaned");
-            Assert.That(map.IsDirt(4, 4), Is.False, "Bottom-right corner should be cleaned");
-            Assert.That(map.IsDirt(0, 4), Is.False, "Bottom-left corner should be cleaned");
+            Assert.That(map.IsDirt(0, 0), Is.False);
+            Assert.That(map.IsDirt(4, 0), Is.False);
+            Assert.That(map.IsDirt(4, 4), Is.False);
+            Assert.That(map.IsDirt(0, 4), Is.False);
         }
     }
 }
