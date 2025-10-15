@@ -111,6 +111,42 @@ namespace RobotCleaner
   }
 
 
+
+public class SpiralStrategy : IStrategy
+{
+    public void Clean(Robot robot)
+    {
+        int[] dx = { 1, 0, -1, 0 };
+        int[] dy = { 0, 1, 0, -1 };
+        int dir = 0;
+        int maxSteps = robot.Map.Width * robot.Map.Height;
+
+        robot.CleanCurrentSpot();
+        int steps = 0;
+        int stuckCounter = 0;
+
+        while (steps < maxSteps)
+        {
+            int nextX = robot.X + dx[dir];
+            int nextY = robot.Y + dy[dir];
+
+            if (robot.Move(nextX, nextY))
+            {
+                robot.CleanCurrentSpot();
+                steps++;
+                stuckCounter = 0; // reset if successful
+            }
+            else
+            {
+                dir = (dir + 1) % 4;
+                stuckCounter++;
+                if (stuckCounter > 10) break; // prevent infinite loop
+            }
+        }
+    }
+}
+
+
   // public class Program
   // {
 

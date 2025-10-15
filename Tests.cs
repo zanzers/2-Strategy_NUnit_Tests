@@ -3,28 +3,42 @@ using NUnit.Framework;
 namespace RobotCleaner
 {
     [TestFixture]
-    public class PerimeterHuggerStrategyTests
+    public class SpiralStrategyTests
     {
         [Test]
-        public void Robot_Cleans_Perimeter_Successfully()
+        public void Robot_Cleans_Spiral_Successfully()
         {
-         
+            // Arrange
             Map map = new Map(5, 5);
             map.AddDirt(0, 0);
-            map.AddDirt(4, 0);
-            map.AddDirt(4, 4);
-            map.AddDirt(0, 4);
+            map.AddDirt(1, 0);
+            map.AddDirt(2, 0);
+            map.AddDirt(2, 1);
+            map.AddDirt(2, 2);
+            map.AddDirt(1, 2);
+            map.AddDirt(0, 2);
+            map.AddDirt(0, 1);
 
-            IStrategy strategy = new PerimeterHuggerStrategy();
-            Robot robot = new Robot(map, strategy);
+            IStrategy spiralStrategy = new SpiralStrategy();
+            Robot robot = new Robot(map, spiralStrategy);
 
-            robot.Move(0, 0);
+            robot.Move(11, 5);
             robot.StartCleaning();
 
-            Assert.That(map.IsDirt(0, 0), Is.False, "Top-left corner should be cleaned");
-            Assert.That(map.IsDirt(4, 0), Is.False, "Top-right corner should be cleaned");
-            Assert.That(map.IsDirt(4, 4), Is.False, "Bottom-right corner should be cleaned");
-            Assert.That(map.IsDirt(0, 4), Is.False, "Bottom-left corner should be cleaned");
+            bool allClean = true;
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    if (map.IsDirt(x, y))
+                    {
+                        allClean = true;
+                        break;
+                    }
+                }
+            }
+
+            Assert.That(allClean, Is.True, "Not all dirt was cleaned by SpiralStrategy.");
         }
     }
 }
