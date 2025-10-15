@@ -53,7 +53,7 @@ namespace RobotCleaner
     public void Display(int robotX, int robotY)
     {
       // display the 2d grid, it accepts the location of the robot in x and y
-      Console.Clear();
+    //   Console.Clear();
       Console.WriteLine("Vacuum cleaner robot simulation");
       Console.WriteLine("--------------------------------");
       Console.WriteLine("Legends: #=Obstacles, D=Dirt, .=Empty, R=Robot, C=Cleaned");
