@@ -8,7 +8,7 @@ namespace RobotCleaner
         [Test]
         public void Robot_Cleans_Spiral_Successfully()
         {
-            // Arrange
+           
             Map map = new Map(5, 5);
             map.AddDirt(0, 0);
             map.AddDirt(1, 0);
@@ -38,7 +38,7 @@ namespace RobotCleaner
                 }
             }
 
-            Assert.That(allClean, Is.True, "Not all dirt was cleaned by SpiralStrategy.");
+            Assert.That(allClean, Is.True, "Not all dirt is cleaned");
         }
     }
 }
